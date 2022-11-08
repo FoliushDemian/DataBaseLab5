@@ -8,4 +8,9 @@ import java.util.List;
 public interface ShopService extends GeneralService<Shop, Integer> {
 
     List<Goods> findAllGoodssByShopId(Integer shopId);
+
+    Integer getAverageMinOrderAmount();
+    void addShopGoodsRelationship(String shopName, String goodsName);
+
+    Shop addShopWithProcedure(String name, Integer minOrderAmount, Integer parentCompanyId);
 }

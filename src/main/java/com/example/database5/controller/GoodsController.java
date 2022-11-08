@@ -24,15 +24,6 @@ public class GoodsController {
     @Autowired
     private GoodsDtoAssembler goodsDtoAssembler;
 
-//    @GetMapping(value = "/customers/{customerId}")
-//    public ResponseEntity<CollectionModel<GoodsDto>> getAllGoodsForCustomer(@PathVariable Integer customerId) {
-//        List<Goods> goodss = goodsService.findGoodsByCustomerId(customerId);
-//        Link selfLink = linkTo(methodOn(GoodsController.class).getAllGoodsForCustomer(customerId)).withSelfRel();
-//        CollectionModel<GoodsDto> goodsDtos = goodsDtoAssembler.toCollectionModel(goodss, selfLink);
-//        return new ResponseEntity<>(goodsDtos, HttpStatus.OK);
-//    }
-
-
     @GetMapping(value = "")
     public ResponseEntity<CollectionModel<GoodsDto>> getAllGoodss() {
         List<Goods> goodss = goodsService.findAll();
@@ -63,6 +54,12 @@ public class GoodsController {
         Goods newGoods = goodsService.create(goods);
         GoodsDto goodsDto = goodsDtoAssembler.toModel(newGoods);
         return new ResponseEntity<>(goodsDto, HttpStatus.CREATED);
+    }
+
+    @PostMapping(value = "/cursor")
+    public ResponseEntity<?> createTablesWithCursor() {
+        goodsService.createTablesWithCursor();
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @PutMapping(value = "/{goodsId}")

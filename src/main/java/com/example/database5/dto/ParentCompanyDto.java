@@ -1,5 +1,6 @@
 package com.example.database5.dto;
 
+import com.example.database5.domain.ParentCompany;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
@@ -11,10 +12,9 @@ import org.springframework.hateoas.server.core.Relation;
 @Getter
 @EqualsAndHashCode(callSuper = false)
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@Relation(itemRelation = "shop", collectionRelation = "shops")
-public class ShopDto extends RepresentationModel<ShopDto>{
-    private Integer id;
-    private String name;
-    private Integer minOrderAmount;
-    private final Integer parentCompanyId;
+@Relation(itemRelation = "parentCompany", collectionRelation = "parentCompanies")
+public class ParentCompanyDto extends RepresentationModel<ParentCompanyDto> {
+    private final Integer id;
+    private final String name;
+
 }

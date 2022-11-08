@@ -22,6 +22,11 @@ public class GoodsServiceImpl implements GoodsService {
     CustomerRepository customerRepository;
 
     @Override
+    public void createTablesWithCursor() {
+        goodsRepository.createTablesWithCursor();
+    }
+
+    @Override
     public List<Goods> findAll() {
         return goodsRepository.findAll();
     }

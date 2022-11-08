@@ -4,7 +4,6 @@ package com.example.database5.service.impl;
 import com.example.database5.domain.Customer;
 import com.example.database5.exception.CustomerNotFoundException;
 import com.example.database5.repository.CustomerRepository;
-import com.example.database5.repository.GoodsRepository;
 import com.example.database5.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,9 +15,6 @@ import java.util.List;
 public class CustomerServiceImpl implements CustomerService {
     @Autowired
     CustomerRepository customerRepository;
-
-//    @Autowired
-//    GoodsRepository goodsRepository;
 
     @Override
     public List<Customer> findAll() {
