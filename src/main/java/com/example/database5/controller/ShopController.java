@@ -8,14 +8,17 @@ import com.example.database5.dto.ShopDto;
 import com.example.database5.dto.assembler.GoodsDtoAssembler;
 import com.example.database5.dto.assembler.ShopDtoAssembler;
 import com.example.database5.service.ShopService;
+import net.minidev.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.Link;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.hateoas.Link;
-import org.springframework.web.bind.annotation.*;
+
+
+import javax.transaction.Transactional;
+
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
@@ -31,6 +34,12 @@ public class ShopController {
 
     @Autowired
     private GoodsDtoAssembler goodsDtoAssembler;
+
+    @GetMapping(value = "/average_min_order_amount")
+    public ResponseEntity<Integer> getAverageMinOrderAmount() {
+        Integer avgMinOrderAmount = shopService.getAverageMinOrderAmount();
+        return new ResponseEntity<>(avgMinOrderAmount, HttpStatus.OK);
+    }
 
     @GetMapping(value = "")
     public ResponseEntity<CollectionModel<ShopDto>> getAllShops() {
@@ -71,5 +80,20 @@ public class ShopController {
         Link selfLink = linkTo(methodOn(ShopController.class).getAllGoodssForShop(shopId)).withSelfRel();
         CollectionModel<GoodsDto> goodsDtos = goodsDtoAssembler.toCollectionModel(goodss, selfLink);
         return new ResponseEntity<>(goodsDtos, HttpStatus.OK);
+    }
+
+    @Transactional
+    @PostMapping(value = "/procedure_insert")
+    public ResponseEntity<ShopDto> addShopWithProcedure(@RequestBody Shop shop) {
+        Shop newShop = shopService.addShopWithProcedure(shop.getName(), shop.getMinOrderAmount(), shop.getParentCompanyId());
+        ShopDto shopDto = shopDtoAssembler.toModel(newShop);
+        return new ResponseEntity<>(shopDto, HttpStatus.CREATED);
+    }
+
+    @Transactional
+    @PostMapping(value = "/relationship")
+    public ResponseEntity<?> addShopGoodsRelationship(@RequestBody JSONObject jsonObject) {
+        shopService.addShopGoodsRelationship(jsonObject.getAsString("shop_name"), jsonObject.getAsString("goods_name"));
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }

@@ -17,6 +17,22 @@ public class ShopServiceImpl implements ShopService {
     ShopRepository shopRepository;
 
     @Override
+    public Integer getAverageMinOrderAmount() {
+        return shopRepository.getAverageMinOrderAmount();
+    }
+
+    @Override
+    public void addShopGoodsRelationship(String shopName, String goodsName) {
+        shopRepository.addShopGoodsRelationship(shopName, goodsName);
+    }
+
+    @Override
+    public Shop addShopWithProcedure(String name, Integer minOrderAmount, Integer parentCompanyId) {
+        return shopRepository.addShopWithProcedure(name, minOrderAmount, parentCompanyId);
+    }
+
+
+    @Override
     public List<Goods> findAllGoodssByShopId(Integer shopId) {
         Shop shop = shopRepository.findById(shopId)
                 .orElseThrow(() -> new ShopNotFoundException(shopId));

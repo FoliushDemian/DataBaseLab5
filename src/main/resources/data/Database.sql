@@ -8,6 +8,7 @@ DROP TABLE IF EXISTS goods_category;
 DROP TABLE IF EXISTS category;
 DROP TABLE IF EXISTS shop_goods;
 DROP TABLE IF EXISTS goods;
+DROP TABLE IF EXISTS parent_company;
 DROP TABLE IF EXISTS shop;
 DROP TABLE IF EXISTS customer;
 
@@ -31,11 +32,18 @@ CREATE TABLE goods
             REFERENCES customer (id)
 );
 
+CREATE TABLE parent_company
+(
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    name         VARCHAR(45) NOT NULL
+);
+
 CREATE TABLE shop
 (
     id               BIGINT AUTO_INCREMENT PRIMARY KEY,
     name             VARCHAR(45) NOT NULL,
-    min_order_amount BIGINT      NOT NULL
+    min_order_amount BIGINT      NOT NULL,
+    parent_company_id INT NULL
 );
 
 CREATE TABLE shop_goods
@@ -108,19 +116,26 @@ VALUES ('laptop', 30000, NULL, 5),
        ('washing_maschine', 10000, '11.09.2030', 4),
        ('soccer_ball', 150, NULL, 9),
        ('frock', 7000, NULL, 7),
-       ('dog_food_4paws', 20, '18.09.2025', 8);
+       ('dog_food_4paws', 20, '18.09.2025', 8),
+       ('jeans', 3456, NULL, 1);
 
-INSERT INTO `shop` (name, min_order_amount)
-VALUES ('shemki', 1000),
-       ('zara', 10000),
-       ('eva', 1),
-       ('lego_land', 1),
-       ('knowledge', 50),
-       ('atb', 1),
-       ('bosh', 500),
-       ('sport_life', 5),
-       ('zoo_gav', 100),
-       ('harvest', 20);
+INSERT INTO `parent_company`(name)
+VALUES ('amazon'),
+       ('dior'),
+       ('ЄКнигарня'),
+       ('ДержХарчування');
+
+INSERT INTO `shop` (name, min_order_amount, parent_company_id)
+VALUES ('shemki', 1000, 1),
+       ('zara', 10000, 2),
+       ('eva', 1, 2),
+       ('lego_land', 1, 3),
+       ('knowledge', 50, 3),
+       ('atb', 1, 4),
+       ('bosh', 500, 1),
+       ('sport_life', 5, 3),
+       ('zoo_gav', 100, 4),
+       ('harvest', 20, 4);
 
 INSERT INTO `shop_goods` (shop_id, goods_id)
 VALUES (1, 1),

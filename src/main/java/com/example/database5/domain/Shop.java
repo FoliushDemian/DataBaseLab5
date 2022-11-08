@@ -18,11 +18,9 @@ public class Shop {
     @Column(name = "min_order_amount")
     private Integer minOrderAmount;
 
-//    @ManyToMany
-//    @JoinTable(name = "shop_goods", catalog = "", schema = "database5", joinColumns = @JoinColumn(name = "shop_id", referencedColumnName = "id", nullable = false), inverseJoinColumns = @JoinColumn(name = "goods_id", referencedColumnName = "id", nullable = false))
-//    private List<Shop> goodss;
-//    @ManyToMany(mappedBy = "goodss")
-//    private List<Shop> shops;
+    @Basic
+    @Column(name = "parent_company_id")
+    private Integer parentCompanyId;
 
     @ManyToMany
     @JoinTable(name = "shop_goods", schema = "database5", joinColumns = @JoinColumn(name = "shop_id", referencedColumnName = "id", nullable = false), inverseJoinColumns = @JoinColumn(name = "goods_id", referencedColumnName = "id", nullable = false))
@@ -50,6 +48,14 @@ public class Shop {
 
     public void setMinOrderAmount(Integer minOrderAmount) {
         this.minOrderAmount = minOrderAmount;
+    }
+
+    public Integer getParentCompanyId() {
+        return parentCompanyId;
+    }
+
+    public void setParentCompanyId(Integer parentCompanyId) {
+        this.parentCompanyId = parentCompanyId;
     }
 
     @Override
