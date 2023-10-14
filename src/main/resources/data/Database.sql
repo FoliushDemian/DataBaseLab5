@@ -53,7 +53,6 @@ CREATE TABLE shop_goods
     PRIMARY KEY (shop_id, goods_id)
 );
 
-
 # ALTER TABLE shop_goods
 #     ADD CONSTRAINT FK_shop_goods_goods
 #         FOREIGN KEY (goods_id)
