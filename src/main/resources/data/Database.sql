@@ -75,6 +75,7 @@ CREATE TABLE goods_category
     PRIMARY KEY (goods_id, category_id)
 );
 
+
 ALTER TABLE goods_category
     ADD CONSTRAINT FK_goods_category_category
         FOREIGN KEY (category_id)
