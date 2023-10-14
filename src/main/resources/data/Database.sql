@@ -64,6 +64,7 @@ CREATE TABLE shop_goods
 
 CREATE TABLE category
 (
+
     id   BIGINT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(45) NOT NULL
 );
