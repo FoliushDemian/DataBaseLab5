@@ -25,7 +25,7 @@ spring:
   datasource:
     url: jdbc:mysql://google/database5?cloudSqlInstance=clouddatabase-402217:europe-west1:database5&socketFactory=com.google.cloud.sql.mysql.SocketFactory
     username: demian
-    password: root
+    password: lox
   jpa:
     hibernate:
       # Hibernate ddl auto (validate, create, create-drop, update)
