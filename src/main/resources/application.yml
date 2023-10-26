@@ -1,11 +1,10 @@
 spring:
   datasource:
-    url: jdbc:mysql://google/database5?cloudSqlInstance=clouddatabase-402217:europe-west1:database5&socketFactory=com.google.cloud.sql.mysql.SocketFactory
+    url: jdbc:mysql://google/database6?cloudSqlInstance=clouddatabase-402217:europe-west1:database5&socketFactory=com.google.cloud.sql.mysql.SocketFactory
     username: demian
     password: lox
   jpa:
     hibernate:
-      # Hibernate ddl auto (validate, create, create-drop, update)
       ddl-auto: update
     properties:
       hibernate:
